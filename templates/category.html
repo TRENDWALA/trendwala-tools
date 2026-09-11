@@ -1,0 +1,51 @@
+<!-- Category Page Template -->
+<div class="container" style="padding-top: 2rem;">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-separator">&rsaquo;</span>
+    <span class="breadcrumb-current">{{categoryName}}</span>
+  </nav>
+
+  <!-- Category Header -->
+  <header style="text-align:center; max-width:820px; margin: 0 auto 3rem;">
+    <span class="hero-pill">{{categoryBadge}}</span>
+    <h1 style="font-size:clamp(2.2rem, 4.5vw, 3.2rem); font-weight:800; letter-spacing:-0.03em; color:var(--text-primary); margin-bottom:1rem;">
+      {{h1}}
+    </h1>
+    <p style="font-size:1.15rem; color:var(--text-secondary); line-height:1.6;">
+      {{subtitle}}
+    </p>
+  </header>
+
+  <!-- Tools in this Category -->
+  <div class="tools-grid">
+    {{toolsCardsHtml}}
+  </div>
+
+  <!-- Ad Slot Placeholder -->
+  <div class="ad-slot-container" aria-hidden="true">
+    <div class="ad-label">Advertisement</div>
+    <span style="font-size:0.8rem;color:var(--text-muted);">Non-intrusive Category Ad Slot Ready</span>
+  </div>
+
+  <!-- Category In-Depth Overview -->
+  <section class="content-article-section" style="margin-top:4rem;">
+    <h2 class="article-title">Why Use TrendWala {{categoryName}}?</h2>
+    <div class="article-prose">
+      <p>{{description}}</p>
+    </div>
+
+    <div class="features-grid">
+      {{featuresHtml}}
+    </div>
+  </section>
+
+  <!-- Category FAQs -->
+  <section class="faq-section">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      {{faqHtml}}
+    </div>
+  </section>
+</div>

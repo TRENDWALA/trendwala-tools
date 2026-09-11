@@ -1,0 +1,46 @@
+# Netlify Configuration for TrendWala Tools (tools.trendwala.in)
+
+[build]
+  publish = "dist"
+  command = "node build.js"
+
+[[redirects]]
+  from = "/compress"
+  to = "/compress/image/"
+  status = 301
+
+[[redirects]]
+  from = "/resize"
+  to = "/resize/image/"
+  status = 301
+
+[[redirects]]
+  from = "/crop"
+  to = "/crop/image/"
+  status = 301
+
+[[redirects]]
+  from = "/rotate"
+  to = "/rotate/image/"
+  status = 301
+
+# Fallback for 404
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Security and Caching Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

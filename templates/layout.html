@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <meta name="description" content="{{metaDescription}}">
+  <link rel="canonical" href="{{canonicalUrl}}">
+  <meta name="robots" content="{{robots}}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{{ogType}}">
+  <meta property="og:url" content="{{canonicalUrl}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{metaDescription}}">
+  <meta property="og:site_name" content="TrendWala Tools">
+  <meta property="og:image" content="{{siteUrl}}/assets/icons/og-image.png">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{metaDescription}}">
+  <meta name="twitter:image" content="{{siteUrl}}/assets/icons/og-image.png">
+
+  <!-- Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/tools.css">
+  {{pageStyles}}
+
+  <!-- Structured Data JSON-LD -->
+  {{structuredData}}
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo" aria-label="TrendWala Tools Homepage">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <span>TrendWala</span>
+        <span class="brand-badge">Fast & Private</span>
+      </a>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="/image-tools/" class="nav-link {{activeImage}}" role="menuitem">Image Tools</a></li>
+        <li role="none"><a href="/pdf-tools/" class="nav-link {{activePdf}}" role="menuitem">PDF Tools</a></li>
+        <li role="none"><a href="/text-tools/" class="nav-link {{activeText}}" role="menuitem">Text Tools</a></li>
+        <li role="none"><a href="/developer-tools/" class="nav-link {{activeDev}}" role="menuitem">Developer Tools</a></li>
+        <li role="none"><a href="/utility-tools/" class="nav-link {{activeUtil}}" role="menuitem">Utilities</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/#search" class="search-trigger-btn" aria-label="Search tools">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Search tools...</span>
+          <kbd>Ctrl+K</kbd>
+        </a>
+
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open mobile menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer-menu" class="mobile-drawer-menu" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-inner">
+      <div class="mobile-drawer-section">
+        <span class="mobile-drawer-heading">Tool Categories</span>
+        <ul class="mobile-drawer-list">
+          <li><a href="/image-tools/" class="mobile-drawer-link"><span class="drawer-dot"></span>Image Tools (12)</a></li>
+          <li><a href="/pdf-tools/" class="mobile-drawer-link"><span class="drawer-dot"></span>PDF Tools (6)</a></li>
+          <li><a href="/text-tools/" class="mobile-drawer-link"><span class="drawer-dot"></span>Text Tools (6)</a></li>
+          <li><a href="/developer-tools/" class="mobile-drawer-link"><span class="drawer-dot"></span>Developer Tools (5)</a></li>
+          <li><a href="/utility-tools/" class="mobile-drawer-link"><span class="drawer-dot"></span>Utility Tools (1)</a></li>
+        </ul>
+      </div>
+      <div class="mobile-drawer-section">
+        <span class="mobile-drawer-heading">Information</span>
+        <ul class="mobile-drawer-list">
+          <li><a href="/about/" class="mobile-drawer-link">About TrendWala</a></li>
+          <li><a href="/privacy/" class="mobile-drawer-link">Privacy Guarantee</a></li>
+          <li><a href="/terms/" class="mobile-drawer-link">Terms of Service</a></li>
+          <li><a href="/contact/" class="mobile-drawer-link">Contact Support</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    {{content}}
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand-logo" aria-label="TrendWala Tools">
+            <div class="brand-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <span>TrendWala</span>
+          </a>
+          <p>Free, fast, and completely private online tools for modern workflows. All files and data are processed locally in your browser. No server uploads. Ever.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Image Tools</h4>
+          <ul class="footer-links">
+            <li><a href="/convert/heic-to-jpg/">HEIC to JPG</a></li>
+            <li><a href="/convert/heic-to-png/">HEIC to PNG</a></li>
+            <li><a href="/compress/image/">Image Compressor</a></li>
+            <li><a href="/resize/image/">Image Resizer</a></li>
+            <li><a href="/crop/image/">Image Cropper</a></li>
+            <li><a href="/image-tools/">View All (12) &rarr;</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>PDF Tools</h4>
+          <ul class="footer-links">
+            <li><a href="/pdf/merge/">PDF Merger</a></li>
+            <li><a href="/pdf/split/">PDF Splitter</a></li>
+            <li><a href="/pdf/rotate/">PDF Page Rotator</a></li>
+            <li><a href="/convert/image-to-pdf/">Image to PDF</a></li>
+            <li><a href="/pdf/to-jpg/">PDF to JPG</a></li>
+            <li><a href="/pdf-tools/">View All (6) &rarr;</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Text & Dev</h4>
+          <ul class="footer-links">
+            <li><a href="/text/word-counter/">Word Counter</a></li>
+            <li><a href="/text/case-converter/">Case Converter</a></li>
+            <li><a href="/developer/json-formatter/">JSON Formatter</a></li>
+            <li><a href="/developer/json-validator/">JSON Validator</a></li>
+            <li><a href="/utility/qr-code-generator/">QR Code Generator</a></li>
+            <li><a href="/developer-tools/">Developer Suite &rarr;</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Information</h4>
+          <ul class="footer-links">
+            <li><a href="/about/">About TrendWala</a></li>
+            <li><a href="/privacy/">Privacy Guarantee</a></li>
+            <li><a href="/terms/">Terms of Service</a></li>
+            <li><a href="/contact/">Contact Support</a></li>
+            <li><a href="/sitemap.xml">XML Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 TrendWala Tools. All rights reserved. 100% Client-Side Processing.</div>
+        <div class="footer-legal-links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+          <a href="/contact/">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript -->
+  <script src="/assets/js/core.js" defer></script>
+  {{pageScripts}}
+</body>
+</html>

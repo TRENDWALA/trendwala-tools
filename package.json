@@ -1,0 +1,28 @@
+{
+  "name": "trendwala-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node serve.js",
+    "test": "node verify-build.js && node test-logic.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cropperjs": "^1.6.2",
+    "heic2any": "^0.0.4",
+    "jszip": "^3.10.2",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^3.11.174",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "isomorphic-git": "^1.42.1",
+    "puppeteer-core": "^25.10.0"
+  }
+}

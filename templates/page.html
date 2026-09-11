@@ -1,0 +1,22 @@
+<!-- Static Page Template -->
+<div class="container" style="padding: 3rem 1.5rem 6rem; max-width: 860px;">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-separator">&rsaquo;</span>
+    <span class="breadcrumb-current">{{pageTitle}}</span>
+  </nav>
+
+  <header style="margin-bottom: 2.5rem;">
+    <h1 style="font-size:clamp(2.2rem, 4vw, 3rem); font-weight:800; letter-spacing:-0.03em; color:var(--text-primary); margin-bottom:0.75rem;">
+      {{h1}}
+    </h1>
+    <p style="font-size:1.15rem; color:var(--text-secondary); line-height:1.6;">
+      {{subtitle}}
+    </p>
+  </header>
+
+  <article class="article-prose">
+    {{pageBodyHtml}}
+  </article>
+</div>

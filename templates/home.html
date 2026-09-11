@@ -1,0 +1,183 @@
+<!-- Homepage Template -->
+<section class="hero-section">
+  <div class="hero-glow"></div>
+  <div class="container hero-content">
+    <div class="hero-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>100% Client-Side &amp; Private</span>
+    </div>
+
+    <h1 class="hero-title">
+      Free Online Tools — <br><span class="hero-gradient-text">Fast, Private &amp; No Upload</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Convert Apple HEIC photos, compress and resize images, merge PDFs, format JSON, and generate QR codes directly in your browser. No files are ever sent to our servers.
+    </p>
+
+    <!-- Live Instant Tool Search -->
+    <div class="search-box-wrapper" id="search">
+      <div class="search-icon-prefix">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <input type="text" id="home-search-input" class="search-input-field" placeholder="Search 30 tools (e.g., 'jpg', 'heic', 'pdf', 'word', 'json')..." autocomplete="off" aria-label="Search tools">
+      <button id="home-search-clear" class="search-clear-btn" aria-label="Clear search">&times;</button>
+    </div>
+
+    <!-- Category Filter Chips -->
+    <div class="filter-chips-row">
+      <button class="filter-chip active" data-category="all">All Tools (30)</button>
+      <button class="filter-chip" data-category="image-tools">Image Tools (12)</button>
+      <button class="filter-chip" data-category="pdf-tools">PDF Tools (6)</button>
+      <button class="filter-chip" data-category="text-tools">Text Tools (6)</button>
+      <button class="filter-chip" data-category="developer-tools">Developer Tools (5)</button>
+      <button class="filter-chip" data-category="utility-tools">Utilities (1)</button>
+    </div>
+  </div>
+</section>
+
+<!-- Ad Slot Placeholder (Non-Intrusive) -->
+<div class="container">
+  <div class="ad-slot-container" aria-hidden="true">
+    <div class="ad-label">Advertisement</div>
+    <span style="font-size:0.8rem;color:var(--text-muted);">Responsive Ad Placement Ready</span>
+  </div>
+</div>
+
+<!-- All 30 Tools Section -->
+<section class="container" style="padding-top: 1rem;">
+  <div class="section-header">
+    <div class="section-title-wrap">
+      <h2>Explore All Free Tools</h2>
+      <p>Instant browser-powered utilities built for privacy, speed, and precision.</p>
+    </div>
+  </div>
+
+  <div class="tools-grid" id="tools-master-grid">
+    {{toolsCardsHtml}}
+  </div>
+
+  <div id="search-empty-state" style="display:none;text-align:center;padding:3rem 1rem;background:var(--bg-secondary);border-radius:var(--radius-lg);border:1px solid var(--border-subtle);margin-bottom:3rem;">
+    <h3 style="font-size:1.25rem;color:var(--text-primary);margin-bottom:0.5rem;">No matching tools found</h3>
+    <p style="color:var(--text-secondary);">Try searching for "heic", "jpg", "pdf", "word", or "json".</p>
+  </div>
+</section>
+
+<!-- Categories Overview Grid -->
+<section class="container" style="padding-top: 2rem;">
+  <div class="section-header">
+    <div class="section-title-wrap">
+      <h2>Browse by Category</h2>
+      <p>Find dedicated suites of tools tailored for your specific document and image tasks.</p>
+    </div>
+  </div>
+
+  <div class="categories-grid">
+    <a href="/image-tools/" class="category-card">
+      <div class="category-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <div class="category-name">Image Tools</div>
+      <div class="category-count">12 Free Tools &rarr;</div>
+    </a>
+
+    <a href="/pdf-tools/" class="category-card">
+      <div class="category-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="category-name">PDF Tools</div>
+      <div class="category-count">6 Free Tools &rarr;</div>
+    </a>
+
+    <a href="/text-tools/" class="category-card">
+      <div class="category-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+      </div>
+      <div class="category-name">Text Tools</div>
+      <div class="category-count">6 Free Tools &rarr;</div>
+    </a>
+
+    <a href="/developer-tools/" class="category-card">
+      <div class="category-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="category-name">Developer Tools</div>
+      <div class="category-count">5 Free Tools &rarr;</div>
+    </a>
+
+    <a href="/utility-tools/" class="category-card">
+      <div class="category-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </div>
+      <div class="category-name">Utility Tools</div>
+      <div class="category-count">1 Free Tool &rarr;</div>
+    </a>
+  </div>
+</section>
+
+<!-- Trust & Privacy Banner -->
+<section class="container">
+  <div class="trust-banner">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>100% Client-Side Privacy</h3>
+        <p>Your photos, contracts, and codes are processed in your browser memory via WebAssembly and Canvas. They are never uploaded to any remote server.</p>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon" style="background:rgba(99,102,241,0.12);color:var(--primary);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>Zero Network Lag</h3>
+        <p>No waiting for upload queues or slow cloud processing. Processing starts immediately using your local hardware CPU and GPU.</p>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon" style="background:rgba(245,158,11,0.12);color:var(--accent-amber);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>No Signups or Paywalls</h3>
+        <p>Every tool is completely free forever. No registration required, no credit cards, no artificial watermarks, and no usage caps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Homepage FAQs -->
+<section class="container faq-section">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <button class="faq-question">
+        <span>How does TrendWala Tools work without uploading files?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Modern web browsers support powerful client-side execution environments including HTML5 2D Canvas, WebAssembly (WASM), and the Web Crypto API. We use compiled in-browser libraries like `heic2any` and `PDF-Lib` that read your local files into browser RAM, process them on your device, and let you save the output directly back to your computer or phone without transmitting data across the internet.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Are there limits on file sizes or number of conversions?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Because processing utilizes your own device's CPU and memory, we do not enforce arbitrary server file limits. You can process as many files as your device can handle in a session.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I use TrendWala Tools on iPhone and Android mobile devices?</span>
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Yes! Every tool has a responsive, mobile-first design that supports touch controls, camera roll file selection, and instant mobile downloads in Safari, Chrome, and Firefox.</p>
+      </div>
+    </div>
+  </div>
+</section>

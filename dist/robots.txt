@@ -1,0 +1,6 @@
+# robots.txt for TrendWala Tools
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://tools.trendwala.in/sitemap.xml
