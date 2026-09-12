@@ -108,7 +108,7 @@ assert(robotsContent.includes('Sitemap: https://tools.trendwala.in/sitemap.xml')
 // Netlify configuration checks
 const netlifyTomlContent = fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8');
 assert(netlifyTomlContent.includes('for = "/sitemap.xml"'), 'netlify.toml has headers for /sitemap.xml');
-assert(netlifyTomlContent.includes('Content-Type = "application/xml; charset=UTF-8"'), 'netlify.toml specifies application/xml for sitemap.xml');
+assert(netlifyTomlContent.includes('Content-Type = "application/xml"'), 'netlify.toml specifies application/xml for sitemap.xml');
 assert(fs.existsSync(path.join(DIST, '_headers')), 'dist/_headers exists');
 assert(fs.existsSync(path.join(DIST, '_redirects')), 'dist/_redirects exists');
 

@@ -50,7 +50,7 @@
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
-    Content-Type = "application/xml; charset=UTF-8"
+    Content-Type = "application/xml"
     X-Content-Type-Options = "nosniff"
     Access-Control-Allow-Origin = "*"
     Cache-Control = "public, max-age=0, must-revalidate"

@@ -1735,7 +1735,7 @@ Sitemap: ${SITE_URL}/sitemap.xml
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
-    Content-Type = "application/xml; charset=UTF-8"
+    Content-Type = "application/xml"
     X-Content-Type-Options = "nosniff"
     Access-Control-Allow-Origin = "*"
     Cache-Control = "public, max-age=0, must-revalidate"
@@ -1771,7 +1771,7 @@ Sitemap: ${SITE_URL}/sitemap.xml
   console.log('⚙ Generating dist/_headers and dist/_redirects...');
   const netlifyHeaders = `# Netlify _headers for TrendWala Tools
 /sitemap.xml
-  Content-Type: application/xml; charset=UTF-8
+  Content-Type: application/xml
   X-Content-Type-Options: nosniff
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=0, must-revalidate
@@ -1804,6 +1804,23 @@ Sitemap: ${SITE_URL}/sitemap.xml
 /*              /404.html           404
 `;
   fs.writeFileSync(path.join(DIST_DIR, '_redirects'), netlifyRedirects, 'utf-8');
+
+  // 11. Generate dist/version.json for live verification
+  let commitHash = process.env.COMMIT_REF || '';
+  if (!commitHash) {
+    try {
+      const git = require('isomorphic-git');
+      commitHash = await git.resolveRef({ fs, dir: __dirname, ref: 'HEAD' });
+    } catch (_) {}
+  }
+  const versionData = {
+    site: SITE_URL,
+    commit: commitHash,
+    sitemapUrl: `${SITE_URL}/sitemap.xml`,
+    sitemapCount: sitemapUrls.length,
+    builtAt: new Date().toISOString()
+  };
+  fs.writeFileSync(path.join(DIST_DIR, 'version.json'), JSON.stringify(versionData, null, 2), 'utf-8');
 
   console.log(`\n🎉 BUILD COMPLETE! Generated 1 Homepage, 5 Category Pages, 30 Tool Pages, 5 Legal/Info Pages, sitemap.xml, robots.txt, and Netlify config in ${DIST_DIR}`);
 }

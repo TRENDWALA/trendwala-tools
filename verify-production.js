@@ -93,7 +93,7 @@ assert(robotsContent.includes('Sitemap: https://tools.trendwala.in/sitemap.xml')
 assert(fs.existsSync(path.join(DIST, '_headers')), 'dist/_headers exists');
 assert(fs.existsSync(path.join(DIST, '_redirects')), 'dist/_redirects exists');
 const distHeaders = fs.readFileSync(path.join(DIST, '_headers'), 'utf8');
-assert(distHeaders.includes('Content-Type: application/xml; charset=UTF-8'), 'dist/_headers specifies XML content type for sitemap.xml');
+assert(distHeaders.includes('Content-Type: application/xml'), 'dist/_headers specifies XML content type for sitemap.xml');
 const distRedirects = fs.readFileSync(path.join(DIST, '_redirects'), 'utf8');
 assert(distRedirects.includes('/sitemap.xml    /sitemap.xml        200'), 'dist/_redirects has explicit pass-through for sitemap.xml');
 
