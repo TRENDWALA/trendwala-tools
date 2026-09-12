@@ -1665,9 +1665,10 @@ ${sitemapUrls.map(item => `  <url>
     <changefreq>${item.changefreq}</changefreq>
     <priority>${item.priority}</priority>
   </url>`).join('\n')}
-</urlset>`;
+</urlset>
+`;
 
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml);
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf-8');
 
   // 8. Generate robots.txt
   console.log('⚙ Generating robots.txt...');
@@ -1678,7 +1679,7 @@ Allow: /
 # Sitemap
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
-  fs.writeFileSync(path.join(DIST_DIR, 'robots.txt'), robotsTxt);
+  fs.writeFileSync(path.join(DIST_DIR, 'robots.txt'), robotsTxt, 'utf-8');
 
   // 9. Generate netlify.toml for root and dist
   console.log('⚙ Generating netlify.toml...');
@@ -1687,6 +1688,22 @@ Sitemap: ${SITE_URL}/sitemap.xml
 [build]
   publish = "dist"
   command = "node build.js"
+
+# Explicit 200 pass-through for sitemap and robots before any fallback
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap"
+  to = "/sitemap.xml"
+  status = 301
 
 [[redirects]]
   from = "/compress"
@@ -1714,6 +1731,23 @@ Sitemap: ${SITE_URL}/sitemap.xml
   to = "/404.html"
   status = 404
 
+# Specific XML Content-Type and Caching Headers for sitemap.xml
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=UTF-8"
+    X-Content-Type-Options = "nosniff"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Specific Plaintext Headers for robots.txt
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 # Security and Caching Headers
 [[headers]]
   for = "/*"
@@ -1730,10 +1764,48 @@ Sitemap: ${SITE_URL}/sitemap.xml
     Cache-Control = "public, max-age=31536000, immutable"
 `;
 
-  fs.writeFileSync(path.join(__dirname, 'netlify.toml'), netlifyToml);
-  fs.writeFileSync(path.join(DIST_DIR, 'netlify.toml'), netlifyToml);
+  fs.writeFileSync(path.join(__dirname, 'netlify.toml'), netlifyToml, 'utf-8');
+  fs.writeFileSync(path.join(DIST_DIR, 'netlify.toml'), netlifyToml, 'utf-8');
 
-  console.log(`\n🎉 BUILD COMPLETE! Generated 1 Homepage, 5 Category Pages, 30 Tool Pages, 5 Legal/Info Pages, sitemap.xml, and robots.txt in ${DIST_DIR}`);
+  // 10. Generate dist/_headers and dist/_redirects for Netlify edge CDN guarantee
+  console.log('⚙ Generating dist/_headers and dist/_redirects...');
+  const netlifyHeaders = `# Netlify _headers for TrendWala Tools
+/sitemap.xml
+  Content-Type: application/xml; charset=UTF-8
+  X-Content-Type-Options: nosniff
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=0, must-revalidate
+
+/robots.txt
+  Content-Type: text/plain; charset=UTF-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+`;
+  fs.writeFileSync(path.join(DIST_DIR, '_headers'), netlifyHeaders, 'utf-8');
+
+  const netlifyRedirects = `# Netlify _redirects for TrendWala Tools
+/sitemap.xml    /sitemap.xml        200
+/robots.txt     /robots.txt         200
+/sitemap        /sitemap.xml        301
+/compress       /compress/image/    301
+/resize         /resize/image/      301
+/crop           /crop/image/        301
+/rotate         /rotate/image/      301
+/*              /404.html           404
+`;
+  fs.writeFileSync(path.join(DIST_DIR, '_redirects'), netlifyRedirects, 'utf-8');
+
+  console.log(`\n🎉 BUILD COMPLETE! Generated 1 Homepage, 5 Category Pages, 30 Tool Pages, 5 Legal/Info Pages, sitemap.xml, robots.txt, and Netlify config in ${DIST_DIR}`);
 }
 
 buildPlatform().catch(err => {

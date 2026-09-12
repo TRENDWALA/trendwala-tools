@@ -73,11 +73,29 @@ assert(fs.existsSync(sitemapPath), 'dist/sitemap.xml exists');
 assert(fs.existsSync(robotsPath), 'dist/robots.txt exists');
 
 const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
-const locCount = (sitemapContent.match(/<loc>/g) || []).length;
-assert(locCount === 40, `sitemap.xml contains exactly 40 indexed production URLs (found ${locCount})`);
+assert(sitemapContent.startsWith('<?xml version="1.0" encoding="UTF-8"?>'), 'sitemap.xml starts with valid XML declaration');
+assert(sitemapContent.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'), 'sitemap.xml has valid <urlset> namespace');
+assert(sitemapContent.trim().endsWith('</urlset>'), 'sitemap.xml closes with </urlset>');
+
+const urlMatches = Array.from(sitemapContent.matchAll(/<loc>([^<]+)<\/loc>/g)).map(m => m[1]);
+assert(urlMatches.length === 40, `sitemap.xml contains exactly 40 indexed production URLs (found ${urlMatches.length})`);
+assert(new Set(urlMatches).size === urlMatches.length, 'sitemap.xml contains zero duplicate URLs');
+
+const invalidUrls = urlMatches.filter(u => !u.startsWith('https://tools.trendwala.in/'));
+assert(invalidUrls.length === 0, `All sitemap URLs are absolute HTTPS under https://tools.trendwala.in/ (invalid: ${invalidUrls.length})`);
+assert(!urlMatches.some(u => u.includes('localhost') || u.startsWith('http://')), 'Zero localhost or HTTP URLs in sitemap loc elements');
+assert(!sitemapContent.includes('404.html'), 'Zero non-indexable URLs (404) in sitemap');
 
 const robotsContent = fs.readFileSync(robotsPath, 'utf8');
 assert(robotsContent.includes('Sitemap: https://tools.trendwala.in/sitemap.xml'), 'robots.txt points to https://tools.trendwala.in/sitemap.xml');
+
+// Netlify edge routing & headers files
+assert(fs.existsSync(path.join(DIST, '_headers')), 'dist/_headers exists');
+assert(fs.existsSync(path.join(DIST, '_redirects')), 'dist/_redirects exists');
+const distHeaders = fs.readFileSync(path.join(DIST, '_headers'), 'utf8');
+assert(distHeaders.includes('Content-Type: application/xml; charset=UTF-8'), 'dist/_headers specifies XML content type for sitemap.xml');
+const distRedirects = fs.readFileSync(path.join(DIST, '_redirects'), 'utf8');
+assert(distRedirects.includes('/sitemap.xml    /sitemap.xml        200'), 'dist/_redirects has explicit pass-through for sitemap.xml');
 
 // 6. CONFIRM CANONICAL URLS USE https://tools.trendwala.in/
 console.log('\n--- 6. CONFIRMING CANONICAL URLS ACROSS ALL PAGES ---');

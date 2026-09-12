@@ -86,10 +86,31 @@ assert(fs.existsSync(sitemapPath), 'sitemap.xml exists');
 assert(fs.existsSync(robotsPath), 'robots.txt exists');
 
 const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
+assert(sitemapContent.startsWith('<?xml version="1.0" encoding="UTF-8"?>'), 'sitemap.xml starts with valid XML declaration');
+assert(sitemapContent.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'), 'sitemap.xml has valid <urlset> namespace');
+assert(sitemapContent.trim().endsWith('</urlset>'), 'sitemap.xml closes with </urlset>');
+
+const urlMatches = Array.from(sitemapContent.matchAll(/<loc>([^<]+)<\/loc>/g)).map(m => m[1]);
+assert(urlMatches.length === 40, `sitemap contains exactly 40 indexed URLs (found ${urlMatches.length})`);
+assert(new Set(urlMatches).size === urlMatches.length, 'sitemap contains zero duplicate URLs');
+
+const invalidUrls = urlMatches.filter(u => !u.startsWith('https://tools.trendwala.in/'));
+assert(invalidUrls.length === 0, `All URLs are absolute HTTPS under https://tools.trendwala.in/ (invalid: ${invalidUrls.length})`);
+assert(!urlMatches.some(u => u.includes('localhost') || u.startsWith('http://')), 'Zero localhost or HTTP URLs in sitemap loc elements');
+assert(!sitemapContent.includes('404.html'), 'Zero non-indexable URLs (404) in sitemap');
+
 assert(sitemapContent.includes('https://tools.trendwala.in/'), 'sitemap includes root URL');
 assert(sitemapContent.includes('https://tools.trendwala.in/convert/heic-to-jpg/'), 'sitemap includes priority HEIC tool');
-const urlMatches = sitemapContent.match(/<loc>/g) || [];
-assert(urlMatches.length >= 40, `sitemap contains ${urlMatches.length} indexed URLs (>= 40 expected)`);
+
+const robotsContent = fs.readFileSync(robotsPath, 'utf8');
+assert(robotsContent.includes('Sitemap: https://tools.trendwala.in/sitemap.xml'), 'robots.txt references Sitemap: https://tools.trendwala.in/sitemap.xml');
+
+// Netlify configuration checks
+const netlifyTomlContent = fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8');
+assert(netlifyTomlContent.includes('for = "/sitemap.xml"'), 'netlify.toml has headers for /sitemap.xml');
+assert(netlifyTomlContent.includes('Content-Type = "application/xml; charset=UTF-8"'), 'netlify.toml specifies application/xml for sitemap.xml');
+assert(fs.existsSync(path.join(DIST, '_headers')), 'dist/_headers exists');
+assert(fs.existsSync(path.join(DIST, '_redirects')), 'dist/_redirects exists');
 
 console.log('\n--- 4. VERIFYING SEO, CANONICAL & JSON-LD ON HEIC PAGE ---');
 const heicHtml = fs.readFileSync(path.join(DIST, 'convert/heic-to-jpg/index.html'), 'utf8');

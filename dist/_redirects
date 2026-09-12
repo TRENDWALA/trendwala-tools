@@ -1,0 +1,9 @@
+# Netlify _redirects for TrendWala Tools
+/sitemap.xml    /sitemap.xml        200
+/robots.txt     /robots.txt         200
+/sitemap        /sitemap.xml        301
+/compress       /compress/image/    301
+/resize         /resize/image/      301
+/crop           /crop/image/        301
+/rotate         /rotate/image/      301
+/*              /404.html           404
